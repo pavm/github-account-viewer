@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <link href='https://fonts.googleapis.com/css?family=Space Mono' rel='stylesheet'>
+
+  <title>Github User Search</title>
+  <style>
+    *{
+     padding: 0;
+     margin: 0;
+     font-family: 'Space Mono';
+    }
+
+    body {
+       background-image: url("images/bg-intro-desktop.png");
+       min-width: 375px;
+       width: 100%;
+       height: auto; }
+
+	  .body-style {background-color: #141D2F;}
+
+       .container { display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    flex-direction: column;}
+
+      .flex-row { display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+   flex-direction: row;}
+
+	  .flex-row-left { display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-start;
+   align-items: center;
+   flex-direction: row;}
+
+	  .flex-row-center { display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: flex-start;
+   flex-direction: row;}
+
+	  .flex-col { display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+   flex-direction: column;}
+
+   .flex-row-stretch { display: flex;
+flex-wrap: wrap;
+justify-content:flex-start;
+align-items: center;
+flex-direction: row;}
+
+
+  .panel-phone {display: none}
+
+   .panel-width {width: 50%}
+
+   .panel-top {margin-top: 5rem}
+   .panel-search {border-radius: 10px; margin-top: 1rem; padding: 0.8rem; box-sizing: border-box;}
+   .panel-main {border-radius: 10px; margin-top: 1rem; box-sizing: border-box; padding-right: 2.5rem; padding-left: 1rem; padding-top: 2rem; padding-bottom: 2rem;}
+   .panel-main-mobile {border-radius: 10px; margin-top: 1rem; box-sizing: border-box; padding-right: 2rem; padding-left: 2rem; padding-top: 2rem; padding-bottom: 2rem; margin-bottom: 2rem;}
+
+	.panel-background {background-color: #1E2A47;}
+
+	  .font-dark {color: white}
+
+
+	  .profile-name {font-size: 1.5rem}
+	  .date-text {font-size: 1rem}
+	  .username-text {color: #0079FF; font-size: 0.9rem; margin-top: 0.3rem}
+	  .bio-text {font-size: 1rem; margin-top: 0.8rem; margin-bottom: 0.8rem}
+
+	.mini-panel {background-color: #141D2F; padding: 1rem; border-radius: 10px; padding-right: 4rem; margin-top: 1rem; margin-bottom: 1rem}
+	  .mini-panel-numbers {font-size: 1.7rem}
+	  .mini-panel-text {font-size: 0.8rem}
+
+   .mode-button {background: none; border: none; cursor: pointer}
+   .mode-img {padding-top: 0.4rem; padding-left: 1rem}
+
+	  .input-text {background: none; color: #FFFFFF; border: none; padding-left: 1rem; padding-right: 1rem; outline: none}
+	  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 1; /* Firefox */ color: white;
+}
+
+	  .input-button {color: white; background-color: #0079FF; border:none; border-radius: 10px; padding-top:0.8rem; padding-bottom: 0.8rem; width: 19%; cursor: pointer}
+
+
+	  .bio {margin-top: 0.6rem; margin-bottom: 0.6rem}
+
+	  .social-media-text {font-size: 0.9rem;}
+	  .text-margin {margin-left: 1rem}
+
+	  .profilepic {height: 6rem; width: 6rem; border-radius: 50px; text-align: center}
+
+	  @media screen and (max-width: 900px) {
+
+	.panel-width {width: 90%}
+    .panel-desktop {display: none}
+    .panel-phone {display: flex;}
+	  }
+
+  </style>
+
+	<script>
+	let mode_current = "white";
+	let mode_background = "black";
+	let mode_panel = "dark";
+
+	let font_color = document.getElementsByClassName('font-dark');
+	let background_color = document.getElementsByClassName('body-style');
+	let panel_background = document.getElementsByClassName('panel-background');
+	let panel_background_2 = document.getElementsByClassName('mini-panel');
+	let input_text = document.getElementsByClassName('input-text');
+
+
+	fetch("https://api.github.com/users/octocat")
+	.then(response=>response.json())
+	.then(data=>console.log(data))
+
+	const get = () => {
+		let search = document.getElementById("input").value;
+		console.log(search)
+
+		fetch("https://api.github.com/users/"+search)
+		.then(response=>response.json())
+		.then(data=>{
+			console.log(data.name);
+			document.getElementById("name").innerHTML = data.name;
+			document.getElementById("username").innerHTML = "@"+data.login;
+
+			document.getElementById("name-mob").innerHTML = data.name;
+			document.getElementById("username-mob").innerHTML = "@"+data.login;
+
+
+			if (data.bio == null) {
+				document.getElementById("bio").innerHTML = "This profile has no bio"
+				document.getElementById("bio-mob").innerHTML = "This profile has no bio"
+			} else {
+				document.getElementById("bio").innerHTML = data.bio;
+				document.getElementById("bio-mob").innerHTML = data.bio;
+		}
+
+			document.getElementById("repos").innerHTML = data.public_repos;
+			document.getElementById("followers").innerHTML = data.followers;
+			document.getElementById("following").innerHTML = data.following;
+			document.getElementById("location").innerHTML = data.location;
+
+			document.getElementById("repos-mob").innerHTML = data.public_repos;
+			document.getElementById("followers-mob").innerHTML = data.followers;
+			document.getElementById("following-mob").innerHTML = data.following;
+			document.getElementById("location-mob").innerHTML = data.location;
+
+			if (data.twitter_username == null) {
+				document.getElementById("twitter").innerHTML = "Not Available"
+			} else {
+				document.getElementById("twitter").innerHTML = data.twitter_username;
+				document.getElementById("twitter-mob").innerHTML = data.twitter_username;
+			}
+
+			document.getElementById("blog").innerHTML = data.blog;
+			document.getElementById("company").innerHTML = data.company;
+
+			document.getElementById("blog-mob").innerHTML = data.blog;
+			document.getElementById("company-mob").innerHTML = data.company;
+
+			document.getElementById("profile-picture").src = data.avatar_url;
+			document.getElementById("profile-picture-mob").src = data.avatar_url;
+
+			let userdate = data.created_at.slice(0,10)
+
+			date = new Date(userdate);
+			year = date.getFullYear();
+			month = date.getMonth();
+			dt = date.getDate();
+
+			const monthNames = ["January", "February", "March", "April", "May", "June",
+  			"July", "August", "September", "October", "November", "December"];
+
+			if (dt < 10) {
+  			dt = '0' + dt;
+			}
+
+			month = monthNames[month];
+			console.log(dt+' ' + month + ' '+year);
+			let longdate = dt+' ' + month + ' '+year;
+
+			document.getElementById("date").innerHTML = 'Joined '+longdate;
+			document.getElementById("date-mob").innerHTML = 'Joined '+longdate;
+
+}
+
+
+			 )}
+
+	 const mode = () => {
+
+		 	if (mode_current == "white") {
+				for (var i = 0; i < font_color.length; i++) {
+  				font_color[i].style.color = 'black';
+			}	for (var i = 0; i < background_color.length; i++) {
+  				background_color[i].style.backgroundColor = 'rgb(246,248,255)';
+			}	for (var i = 0; i < panel_background.length; i++) {
+  				panel_background[i].style.backgroundColor = 'rgb(254,254,254)';
+			}	for (var i = 0; i < panel_background_2.length; i++) {
+  				panel_background_2[i].style.backgroundColor = 'rgb(246,248,255)';
+			}	for (var i = 0; i < input_text.length; i++) {
+  				input_text[i].style.color = 'black';
+
+			}
+				mode_current = "black";
+				document.getElementById("modebutton").innerHTML = "DARK";
+				document.getElementById("modeimg").src = "../starter-code/assets/icon-moon.svg"
+			} else {
+				for (var i = 0; i < font_color.length; i++) {
+  				font_color[i].style.color = 'white';
+			} 	for (var i = 0; i < background_color.length; i++) {
+  				background_color[i].style.backgroundColor = 'rgb(20,29,47)';
+			}	for (var i = 0; i < panel_background.length; i++) {
+  				panel_background[i].style.backgroundColor = 'rgb(30,42,71)';
+			}	for (var i = 0; i < panel_background_2.length; i++) {
+  				panel_background_2[i].style.backgroundColor = 'rgb(20,29,47)';
+			}
+				mode_current = "white";
+				document.getElementById("modebutton").innerHTML = "LIGHT";
+				document.getElementById("modeimg").src = "../starter-code/assets/icon-sun.svg"
+			}
+
+	 }
+
+
+</script>
+</head>
+
+<body class="body-style">
+<main>
+
+<div class="container">
+
+<div class="flex-row-center panel-top panel-width">
+<div><p class="font-dark">devfinder</p></div>
+<div class="flex-row">
+<div><button class="mode-button font-dark" onClick="mode();" id="modebutton">LIGHT</button></div>
+<div><img src="../starter-code/assets/icon-sun.svg" class="mode-img" id="modeimg"></div>
+</div>
+</div>
+
+<div class="flex-row panel-search panel-width panel-background">
+<img src="../starter-code/assets/icon-search.svg">
+<div style="flex-grow: 1;">
+<form>
+<div style="display: flex;">
+<input id="input" class="input-text font-dark" type="text" style="flex-grow: 1;" placeholder="Search Github username..."></input>
+<input class="input-button" type="button" name="search" onclick="get();" value="Search"></input>
+</div>
+</form>
+</div>
+</div>
+
+
+
+<div class="flex-row-center panel-main panel-width panel-background panel-desktop">
+	<div style="width:20%"><img id="profile-picture" class="profilepic"></div>
+	<div style="width:80%">
+
+		<div class="flex-row">
+		<div><p class="profile-name font-dark" id="name">Name</p></div>
+		<div><p class="date-text font-dark" id="date">Date</p></div>
+		</div>
+
+		<div class="flex-row">
+		<div><p class="username-text" id="username">@UserName</p></div>
+		</div>
+
+		<div class="flex-row bio">
+		<div><p class="bio-text font-dark" id="bio">This profile has no bio</p></div>
+		</div>
+
+		<div class="flex-row mini-panel">
+		<div><p class="mini-panel-text font-dark">Repos</p><p class="mini-panel-numbers font-dark" id="repos">1</p></div>
+		<div><p class="mini-panel-tex font-dark">Followers</p><p class="mini-panel-numbers font-dark" id="followers">2</p></div>
+		<div><p class="mini-panel-text font-dark">Following</p><p class="mini-panel-numbers font-dark" id="following">3</p></div>
+		</div>
+
+		<div class="flex-row-left" style="margin-bottom: 1.2rem">
+		<div class="flex-row-left social-media-text" style="width:50%"><img src="../starter-code/assets/icon-location.svg"><p class="text-margin font-dark" id="location">Repos</p></div>
+		<div class="flex-row-left social-media-text font-dark" style="width:50%"><img src="../starter-code/assets/icon-twitter.svg"><p class="text-margin" id="twitter">Followers</p></div>
+		</div>
+
+		<div class="flex-row-left">
+		<div class="flex-row-left social-media-text" style="width:50%"><img src="../starter-code/assets/icon-website.svg"><p class="text-margin font-dark" id="blog">Repos</p></div>
+		<div class="flex-row-left social-media-text" style="width:50%"><img src="../starter-code/assets/icon-company.svg"><p class="text-margin font-dark" id="company">Followers</p></div>
+		</div>
+
+		</div>
+	</div>
+
+
+  <div class="flex-row-center panel-main-mobile panel-width panel-background panel-phone">
+  	<div style="width:100%">
+
+      <div class="flex-row-center">
+        <div><img id="profile-picture-mob" class="profilepic"></div>
+      </div>
+
+  		<div class="flex-row">
+  		<div><p class="profile-name font-dark" id="name-mob">Name</p></div>
+  		<div><p class="date-text font-dark" id="date-mob">Date</p></div>
+  		</div>
+
+  		<div class="flex-row">
+  		<div><p class="username-text" id="username-mob">@UserName</p></div>
+  		</div>
+
+  		<div class="flex-row bio">
+  		<div><p class="bio-text font-dark" id="bio-mob">This profile has no bio</p></div>
+  		</div>
+
+  		<div class="flex-row mini-panel">
+  		<div><p class="mini-panel-text font-dark">Repos</p><p class="mini-panel-numbers font-dark" id="repos-mob">1</p></div>
+  		<div><p class="mini-panel-tex font-dark">Followers</p><p class="mini-panel-numbers font-dark" id="followers-mob">2</p></div>
+  		<div><p class="mini-panel-text font-dark">Following</p><p class="mini-panel-numbers font-dark" id="following-mob">3</p></div>
+  		</div>
+
+  		<div class="flex-row-left" style="margin-bottom: 1.2rem">
+  		<div class="flex-row-left social-media-text"><img src="../starter-code/assets/icon-location.svg"><p class="text-margin font-dark" id="location-mob">Repos</p></div>
+  		</div>
+
+		<div class="flex-row-left" style="margin-bottom: 1.2rem">
+  		<div class="flex-row-left social-media-text font-dark"><img src="../starter-code/assets/icon-twitter.svg"><p class="text-margin" id="twitter-mob">Followers</p></div>
+  		</div>
+
+		<div class="flex-row-left" style="margin-bottom: 1.2rem">
+  		<div class="flex-row-left social-media-text"><img src="../starter-code/assets/icon-website.svg"><p class="text-margin font-dark" id="blog-mob">Repos</p></div>
+  		</div>
+
+  		<div class="flex-row-left" style="margin-bottom: 1.2rem">
+  		<div class="flex-row-left social-media-text"><img src="../starter-code/assets/icon-company.svg"><p class="text-margin font-dark" id="company-mob">Followers</p></div>
+  		</div>
+
+  		</div>
+  	</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+</main>
+</body>
+</html>

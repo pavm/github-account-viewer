@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link href='https://fonts.googleapis.com/css?family=Space Mono' rel='stylesheet'>
 
   <title>Github User Search</title>
@@ -17,7 +17,7 @@
     }
 
     body {
-       background-image: url("images/bg-intro-desktop.png");
+       background-image: url("bg-intro-desktop.png");
        min-width: 375px;
        width: 100%;
        height: auto; }
@@ -219,7 +219,7 @@ flex-direction: row;}
 			}
 				mode_current = "black";
 				document.getElementById("modebutton").innerHTML = "DARK";
-				document.getElementById("modeimg").src = "../starter-code/assets/icon-moon.svg"
+				document.getElementById("modeimg").src = "icon-moon.svg"
 			} else {
 				for (var i = 0; i < font_color.length; i++) {
   				font_color[i].style.color = 'white';
@@ -232,7 +232,7 @@ flex-direction: row;}
 			}
 				mode_current = "white";
 				document.getElementById("modebutton").innerHTML = "LIGHT";
-				document.getElementById("modeimg").src = "../starter-code/assets/icon-sun.svg"
+				document.getElementById("modeimg").src = "icon-sun.svg"
 			}
 
 	 }
@@ -250,17 +250,17 @@ flex-direction: row;}
 <div><p class="font-dark">devfinder</p></div>
 <div class="flex-row">
 <div><button class="mode-button font-dark" onClick="mode();" id="modebutton">LIGHT</button></div>
-<div><img src="../starter-code/assets/icon-sun.svg" class="mode-img" id="modeimg"></div>
+<div><img src="icon-sun.svg" class="mode-img" id="modeimg"></div>
 </div>
 </div>
 
 <div class="flex-row panel-search panel-width panel-background">
-<img src="../starter-code/assets/icon-search.svg">
+<img src="icon-search.svg">
 <div style="flex-grow: 1;">
 <form>
 <div style="display: flex;">
 <input id="input" class="input-text font-dark" type="text" style="flex-grow: 1;" placeholder="Search Github username..."></input>
-<input class="input-button" type="button" name="search" onclick="get();" value="Search"></input>
+<input class="input-button" type="button" name="search" onclick="return get();" value="Search"></input>
 </div>
 </form>
 </div>
@@ -292,13 +292,13 @@ flex-direction: row;}
 		</div>
 
 		<div class="flex-row-left" style="margin-bottom: 1.2rem">
-		<div class="flex-row-left social-media-text" style="width:50%"><img src="../starter-code/assets/icon-location.svg"><p class="text-margin font-dark" id="location">Repos</p></div>
-		<div class="flex-row-left social-media-text font-dark" style="width:50%"><img src="../starter-code/assets/icon-twitter.svg"><p class="text-margin" id="twitter">Followers</p></div>
+		<div class="flex-row-left social-media-text" style="width:50%"><img src="icon-location.svg"><p class="text-margin font-dark" id="location">Repos</p></div>
+		<div class="flex-row-left social-media-text font-dark" style="width:50%"><img src="icon-twitter.svg"><p class="text-margin" id="twitter">Followers</p></div>
 		</div>
 
 		<div class="flex-row-left">
-		<div class="flex-row-left social-media-text" style="width:50%"><img src="../starter-code/assets/icon-website.svg"><p class="text-margin font-dark" id="blog">Repos</p></div>
-		<div class="flex-row-left social-media-text" style="width:50%"><img src="../starter-code/assets/icon-company.svg"><p class="text-margin font-dark" id="company">Followers</p></div>
+		<div class="flex-row-left social-media-text" style="width:50%"><img src="icon-website.svg"><p class="text-margin font-dark" id="blog">Repos</p></div>
+		<div class="flex-row-left social-media-text" style="width:50%"><img src="icon-company.svg"><p class="text-margin font-dark" id="company">Followers</p></div>
 		</div>
 
 		</div>
@@ -332,19 +332,19 @@ flex-direction: row;}
   		</div>
 
   		<div class="flex-row-left" style="margin-bottom: 1.2rem">
-  		<div class="flex-row-left social-media-text"><img src="../starter-code/assets/icon-location.svg"><p class="text-margin font-dark" id="location-mob">Repos</p></div>
+  		<div class="flex-row-left social-media-text"><img src="icon-location.svg"><p class="text-margin font-dark" id="location-mob">Repos</p></div>
   		</div>
 
 		<div class="flex-row-left" style="margin-bottom: 1.2rem">
-  		<div class="flex-row-left social-media-text font-dark"><img src="../starter-code/assets/icon-twitter.svg"><p class="text-margin" id="twitter-mob">Followers</p></div>
+  		<div class="flex-row-left social-media-text font-dark"><img src="icon-twitter.svg"><p class="text-margin" id="twitter-mob">Followers</p></div>
   		</div>
 
 		<div class="flex-row-left" style="margin-bottom: 1.2rem">
-  		<div class="flex-row-left social-media-text"><img src="../starter-code/assets/icon-website.svg"><p class="text-margin font-dark" id="blog-mob">Repos</p></div>
+  		<div class="flex-row-left social-media-text"><img src="icon-website.svg"><p class="text-margin font-dark" id="blog-mob">Repos</p></div>
   		</div>
 
   		<div class="flex-row-left" style="margin-bottom: 1.2rem">
-  		<div class="flex-row-left social-media-text"><img src="../starter-code/assets/icon-company.svg"><p class="text-margin font-dark" id="company-mob">Followers</p></div>
+  		<div class="flex-row-left social-media-text"><img src="icon-company.svg"><p class="text-margin font-dark" id="company-mob">Followers</p></div>
   		</div>
 
   		</div>
